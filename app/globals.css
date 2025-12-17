@@ -1,0 +1,422 @@
+/* app/globals.css */
+
+/* -----------------------------
+   Base / Theme
+------------------------------ */
+:root {
+  --bg: #070b13;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-2: rgba(255, 255, 255, 0.035);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.62);
+
+  --radius: 18px;
+
+  /* Fluid type */
+  --fs-1: clamp(28px, 3.2vw, 36px);
+  --fs-2: clamp(18px, 2.2vw, 22px);
+  --fs-3: 15px;
+
+  --lh: 1.55;
+  --measure: 65ch;
+
+  /* Fluid spacing */
+  --sp-1: clamp(8px, 1.2vw, 12px);
+  --sp-2: clamp(12px, 2vw, 18px);
+  --sp-3: clamp(16px, 2.6vw, 24px);
+
+  --shadow: 0 12px 44px rgba(0, 0, 0, 0.42);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(
+      1200px 600px at 15% -10%,
+      rgba(99, 102, 241, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 85% 0%,
+      rgba(14, 165, 233, 0.14),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 520px at 60% 110%,
+      rgba(168, 85, 247, 0.12),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: var(--lh);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* -----------------------------
+   Accessibility / Progressive Enhancement
+------------------------------ */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.36);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -----------------------------
+   Layout
+------------------------------ */
+.container {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  container-type: inline-size; /* container queries */
+}
+
+/* readable blocks */
+.prose {
+  max-width: var(--measure);
+}
+
+/* -----------------------------
+   Typography
+------------------------------ */
+.h1 {
+  font-size: var(--fs-1);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.h2 {
+  font-size: var(--fs-2);
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* -----------------------------
+   Small UI primitives
+------------------------------ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+}
+
+/* pills for role/status */
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.pillUser {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pillAdmin {
+  background: rgba(255, 193, 7, 0.16);
+  border-color: rgba(255, 193, 7, 0.35);
+}
+
+/* row helper */
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* -----------------------------
+   Sidebar
+------------------------------ */
+.sidebar {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: 28px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.045),
+    rgba(255, 255, 255, 0.02)
+  );
+}
+
+.sidebar .h1 {
+  opacity: 0.95;
+}
+
+.sidebar .h2 {
+  opacity: 0.55;
+}
+
+/* -----------------------------
+   Media blocks (images)
+------------------------------ */
+.media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* -----------------------------
+   Inputs / Buttons
+------------------------------ */
+.input,
+.btn {
+  min-height: 44px; /* good tap target */
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-size: var(--fs-3);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.btn {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.16s ease, opacity 0.16s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* danger button variant */
+.btnDanger {
+  background: rgba(255, 71, 87, 0.12);
+  border-color: rgba(255, 71, 87, 0.35);
+}
+
+.btnDanger:hover {
+  background: rgba(255, 71, 87, 0.2);
+}
+
+/* -----------------------------
+   Todo form
+------------------------------ */
+.todoForm {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.todoForm .input {
+  flex: 1 1 260px;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.todoForm .btn {
+  flex: 0 0 auto;
+}
+
+/* -----------------------------
+   Todo list
+------------------------------ */
+.todoList {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.todoItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.todoTitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.todoTitle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: rgba(99, 102, 241, 0.95);
+}
+
+.todoTitle a {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.todoItem .btn {
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.todoItem .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.todoItem[data-completed="true"] {
+  opacity: 0.6;
+}
+
+.todoItem[data-completed="true"] .todoTitle span {
+  text-decoration: line-through;
+}
+
+/* -----------------------------
+   UserPanel
+------------------------------ */
+.userPanel {
+  display: grid;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* -----------------------------
+   Container Query demo (optional)
+------------------------------ */
+@container (min-width: 520px) {
+  .cardSplit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+    align-items: start;
+  }
+}
+
+.tabs {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tab {
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 36px;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tabActive {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.95);
+}
