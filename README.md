@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🚀 Todo App
 
-## Getting Started
+- Kullanıcı giriş/çıkış (cookie tabanlı basit auth)
+- Todo ekleme, silme, tamamlama (CRUD)
+- Todo listeleme ve detay sayfası
+- Auth guard (login olmadan protected sayfalara erişim yok)
+- Responsive ve erişilebilir (ARIA-first) UI
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠 Kullanılan Teknolojiler
+
+### Frontend
+
+- **Next.js (App Router)**
+- **React 19**
+- **TypeScript**
+- Modern CSS (Grid, Flexbox, responsive layout)
+
+### Testing
+
+- **Vitest** – Unit & integration test runner
+- **React Testing Library (RTL)** – Kullanıcı davranışı odaklı testler
+- **MSW (Mock Service Worker)** – API isteklerini izole ederek test etme
+- **Playwright** – Uçtan uca (E2E) testler
+- **Custom Test Matchers** – Test okunabilirliğini artırmak için
+
+---
+
+## 🧪 Testler
+
+### ✅ Unit & Integration Tests (Vitest + RTL)
+
+- Todo ekleme / silme / toggle etme
+- Loading ve error state’leri
+- Form davranışları
+- Auth success/fail senaryolar
+- Routing ve redirect logic
+- Accessibility odaklı element seçimi  
+  (`getByRole`, `getByLabelText`)
+
+### ✅ API & Data Layer
+
+- MSW ile `/api/todos` ve `/api/login` endpoint’leri
+- Başarılı ve hatalı response senaryoları
+
+### ✅ E2E Tests (Playwright)
+
+- Login olmadan protected route’a erişim
+- Login → Todo ekleme → Toggle → Silme akışı
+- Browser ortamında auth + middleware testleri
+
+---
+
+## 📂 Proje Yapısı
+
+```txt
+tests/
+ ├─ auth/          → Login & auth testleri
+ ├─ todos/         → Todo component & page testleri
+ ├─ components/    → UI component testleri
+ ├─ setupTests.tsx → Test setup & custom matcher’lar
+
+e2e/
+ ├─ auth.spec.ts        → Auth guard testleri
+ └─ todos-flow.spec.ts → Full kullanıcı akışı
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Testleri Çalıştırma
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Projede hem unit/integration hem de uçtan uca (E2E) testler bulunmaktadır.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 🧪 Unit & Integration Testleri (Vitest)
 
-To learn more about Next.js, take a look at the following resources:
+Component, page ve hook testlerini çalıştırır.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧪 E2E Testleri (Playwright)
 
-## Deploy on Vercel
+Gerçek browser ortamında tam kullanıcı akışını test eder.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+yarn test:e2e
+```
